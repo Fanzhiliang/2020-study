@@ -3,6 +3,10 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 // 打包时复制文件到打包目录
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+// 静态文件目录
+const StaticPath = './public'
+// 打包文件目录
+const BuildPath = './dist'
 
 module.exports = {
   //  入口文件
@@ -10,13 +14,13 @@ module.exports = {
   // 打包路径
   output: {
     // 必须是绝对路径
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, BuildPath),
     filename: 'static/js/main.js'
   },
   devServer: {
     port: 3000,
     // 此路径下的打包文件可在浏览器中访问
-    contentBase: path.join(__dirname, "public"),
+    contentBase: path.join(__dirname, StaticPath),
     // 代理
     // proxy: {
     //   [process.env.BASE_API]: {
@@ -74,14 +78,14 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./public/index.html",
-      filename: "index.html"
+      template: path.resolve(__dirname, StaticPath, 'index.html'),
+      filename: 'index.html'
     }),
     new CopyWebpackPlugin([
-      // 把 static 文件内的内容复制到 output.path 路径下的static文件内
+      // 把 静态 文件夹内的内容复制到 打包 文件夹下
       {
-        from: path.join(__dirname, 'public/static'),
-        to: "./static"
+        from: path.resolve(__dirname, StaticPath),
+        to: path.resolve(__dirname, BuildPath)
       }
     ]),
   ]

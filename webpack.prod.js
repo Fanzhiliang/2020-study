@@ -4,6 +4,9 @@ const base = require('./webpack.config.js')
 
 module.exports = merge(base, {
   mode: 'production',
+  output: {
+    publicPath: './'
+  },
   plugins: [
     new webpack.DefinePlugin({
       NODE_ENV: "'production'",
