@@ -16,7 +16,18 @@ module.exports = {
   devServer: {
     port: 3000,
     // 此路径下的打包文件可在浏览器中访问
-    contentBase: path.join(__dirname, "public")
+    contentBase: path.join(__dirname, "public"),
+    // 代理
+    // proxy: {
+    //   [process.env.BASE_API]: {
+    //     target: '',
+    //     changeOrigin: true,
+    //     ws: false,
+    //     pathRewrite: {
+    //       ['^' + process.env.BASE_API]: ''
+    //     }
+    //   }
+    // }
   },
   module: {
     rules: [
