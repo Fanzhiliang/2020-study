@@ -3,12 +3,11 @@ import './style/reset.css'
 import './style/index.scss'
 
 // 导入模块
-import { moduleLog } from './moduleLog'
+import { Compute } from '@/utils'
 
-console.log(moduleLog())
+console.log(Compute)
 
-document.write(moduleLog())
-
+console.log(Compute.add(0.1, 0.2))
 
 // 处理图片
 import img3 from './assets/img-3.jpg'

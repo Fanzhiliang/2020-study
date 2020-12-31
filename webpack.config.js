@@ -7,20 +7,32 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const StaticPath = './public'
 // 打包文件目录
 const BuildPath = './dist'
+// src文件目录
+const SrcPath = './src'
 
 module.exports = {
   //  入口文件
-  entry: './src/index.js',
+  // entry: path.resolve(SrcPath, 'index.js'),
+  entry: {
+    index: path.resolve(SrcPath, 'index.js'),
+    readme: path.resolve(SrcPath, 'readme.js'),
+  },
   // 打包路径
   output: {
     // 必须是绝对路径
     path: path.join(__dirname, BuildPath),
-    filename: 'static/js/main.js'
+    // [name]：多入口文件名
+    // [hash]：hash值
+    filename: 'static/js/[name].[hash].js'
   },
   devServer: {
     port: 3000,
+    // 自动打开
+    open: true,
+    // gzip 压缩
+    compress: true,
     // 此路径下的打包文件可在浏览器中访问
-    contentBase: path.join(__dirname, StaticPath),
+    contentBase: path.resolve(StaticPath),
     // 代理
     // proxy: {
     //   [process.env.BASE_API]: {
@@ -32,6 +44,11 @@ module.exports = {
     //     }
     //   }
     // }
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(SrcPath)
+    }
   },
   module: {
     rules: [
@@ -69,23 +86,27 @@ module.exports = {
             options: {
               outputPath: "static/img/",
               // 小于200kb用base64解析
-              limit: 200 * 1024,
-              esModule: false
+              limit: 200 * 1024
             }
           }
         ]
-      },
-      //处理在html中图片文件路径
-      {
-        test: /\.html$/,
-        use: "html-withimg-loader"
       }
     ]
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, StaticPath, 'index.html'),
-      filename: 'index.html'
+      filename: 'index.html',
+      title: '首页',
+      // 只引用某些入口文件，这些入口的值要在 entry 设置
+      chunks: ['index']
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, StaticPath, 'index.html'),
+      filename: 'readme.html',
+      title: '简历',
+      // 只引用某些入口文件，这些入口的值要在 entry 设置
+      chunks: ['readme']
     }),
     new CopyWebpackPlugin([
       // 把 静态 文件夹内的内容复制到 打包 文件夹下
