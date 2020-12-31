@@ -17,6 +17,12 @@ img.width = 100
 document.body.appendChild(img)
 img.src = img3
 
+const div = document.createElement('div')
+
+div.classList.add('bg')
+
+document.body.appendChild(div)
+
 // 环境变量
 console.log('环境变量：')
 console.log(NODE_ENV)
