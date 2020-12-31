@@ -17,26 +17,13 @@ module.exports = merge(base, {
   module: {
     rules: [
       {
-        test: /\.css$/,
+        test: /\.(css|sass|scss)$/,
         // 注意 loader 加载顺序和书写顺序是相反的
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              publicPath: '../../'
-            }
-          },
-          'css-loader',
-          'postcss-loader'
-        ]
-      },
-      {
-        test: /\.(sass|scss)$/,
-        // 注意 loader 加载顺序和书写顺序是相反的
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
+              // 根据抽离出来的css文件路径来设置
               publicPath: '../../'
             }
           },
@@ -48,7 +35,38 @@ module.exports = merge(base, {
     ]
   },
   optimization: {
-    minimizer: [new OptimizeCssAssetsPlugin(), new TerserWebpackPlugin()]
+    // 压缩配置
+    minimizer: [new OptimizeCssAssetsPlugin(), new TerserWebpackPlugin()],
+    // 代码分割
+    splitChunks: {
+      /**
+       * initial：对异步导入的文件不处理
+       * async：只对异步导入的文件进行处理
+       * all：全部
+      */
+      chunks: 'all',
+      cacheGroups: {
+        // 第三方模块
+        vendor: {
+          // chunks 名称
+          name: 'vendor',
+          // 权重，越高越优先抽离
+          priority: 1,
+          test: /node_modules/,
+          // 大小限制：大于多少才抽离
+          minSize: 0,
+          // 复用限制：用了多少次才抽离
+          minChunks: 1
+        },
+        // 公共模块
+        common: {
+          name: 'common',
+          priority: 1,
+          minSize: 0,
+          minChunks: 2
+        },
+      }
+    }
   },
   plugins: [
     new webpack.DefinePlugin({
