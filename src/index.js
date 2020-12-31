@@ -28,7 +28,39 @@ div.classList.add('bg')
 
 document.body.appendChild(div)
 
+// const jsxTest = <div>sb</div>
+
+// console.log(jsxTest)
+
 // 环境变量
 console.log('环境变量：')
 console.log(NODE_ENV)
 console.log(BASE_API)
+
+// 异步加载js
+
+setTimeout(() => {
+  import(/* webpackChunkName: "asyncPlugin" */ './plugins/async-plugin.js').then(res => {
+    console.log(res.default.message)
+  })
+
+  // require.ensure([], function() {
+  //   const res = require('./plugins/async-plugin.js')
+  //   console.log(res.default.message)
+  // })
+}, 1500)
+
+// 处理vue
+import Vue from 'vue'
+import App from './index.vue'
+
+new Vue({
+  render() {
+    const span = <span>sb777</span>
+
+    return <div>
+      { span }
+      <App />
+    </div>
+  }
+}).$mount('#app')

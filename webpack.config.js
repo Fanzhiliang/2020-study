@@ -2,8 +2,9 @@ const path = require('path')
 // 生成html的插件
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 // 打包时复制文件到打包目录
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+// 处理 vue
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 // 静态文件目录
 const StaticPath = './public'
@@ -48,6 +49,7 @@ module.exports = {
     // }
   },
   resolve: {
+    extensions: ['.js', '.jsx'],
     alias: {
       '@': path.resolve(SrcPath)
     }
@@ -58,6 +60,11 @@ module.exports = {
         test: /\.(js|jsx)$/,
         use: 'babel-loader',
         exclude: path.resolve('node_modules'),
+        include: path.resolve('src')
+      },
+      {
+        test: /\.vue$/,
+        use: 'vue-loader',
         include: path.resolve('src')
       },
       //处理文件
@@ -98,5 +105,6 @@ module.exports = {
         to: path.resolve(__dirname, BuildPath)
       }
     ]),
+    new VueLoaderPlugin()
   ]
 }
