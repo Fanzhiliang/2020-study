@@ -1,21 +1,37 @@
+const path = require('path')
 const webpack = require('webpack')
 const { merge } = require('webpack-merge')
 const base = require('./webpack.config.js')
 
 //将css打包成.css文件，而不是放在style标签内
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 //压缩css代码
-const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin")
 //使用上面的插件后，js代码就不压缩了，要用这插件
-const TerserWebpackPlugin = require("terser-webpack-plugin");
+const TerserWebpackPlugin = require("terser-webpack-plugin")
+// 开启多进程打包
+const Happypack = require('happypack')
+//  开启多进程压缩 js 代码
+const WebpackParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
+
+const PublicPath = './'
 
 module.exports = merge(base, {
   mode: 'production',
   output: {
-    publicPath: './'
+    publicPath: PublicPath
   },
   module: {
     rules: [
+      // 处理 js 新语法
+      {
+        test: /\.(js|jsx)$/,
+        // 使用 Happypack 开启多进程打包
+        use: 'Happypack/loader?id=babel',
+        // 明确范围
+        exclude: path.resolve('node_modules'),
+        include: path.resolve('src')
+      },
       {
         test: /\.(css|sass|scss)$/,
         // 注意 loader 加载顺序和书写顺序是相反的
@@ -71,11 +87,65 @@ module.exports = merge(base, {
   plugins: [
     new webpack.DefinePlugin({
       NODE_ENV: "'production'",
-      BASE_API: "'/prod'"
+      BASE_API: "'/prod'",
+      BASE_URL: "'" + PublicPath + "'"
     }),
     // 抽离css
     new MiniCssExtractPlugin({
       filename: 'static/css/main.[hash].css'
-    })
+    }),
+    // 开启多进程打包
+    new Happypack({
+      id: 'babel',
+      use: [
+        {
+          // cacheDirectory：开启缓存
+          loader: 'babel-loader?cacheDirectory'
+        }
+      ]
+    }),
+    // 开启多进程压缩 js 代码
+    new WebpackParallelUglifyPlugin({
+      test: /.js$/g,
+      include: [],
+      exclude: [],
+      cacheDir: '',
+      workerCount: '',
+      sourceMap: false,
+      uglifyJS: {
+        output: {
+          /*
+           是否输出可读性较强的代码，即会保留空格和制表符，默认为输出，为了达到更好的压缩效果，
+           可以设置为false
+          */
+          beautify: false,
+          /*
+           是否保留代码中的注释，默认为保留，为了达到更好的压缩效果，可以设置为false
+          */
+          comments: false
+        },
+        /*
+          是否在UglifyJS删除没有用到的代码时输出警告信息，默认为输出，可以设置为false关闭这些作用
+          不大的警告
+        */
+        warnings: false,
+        compress: {
+          /*
+           是否删除代码中所有的console语句，默认为不删除，开启后，会删除所有的console语句
+          */
+          drop_console: true,
+          /*
+           是否内嵌虽然已经定义了，但是只用到一次的变量，比如将 var x = 1; y = x, 转换成 y = 5, 默认为不
+           转换，为了达到更好的压缩效果，可以设置为false
+          */
+          collapse_vars: true,
+          /*
+           是否提取出现了多次但是没有定义成变量去引用的静态值，比如将 x = 'xxx'; y = 'xxx'  转换成
+           var a = 'xxxx'; x = a; y = a; 默认为不转换，为了达到更好的压缩效果，可以设置为false
+          */
+          reduce_vars: true
+        }
+      }
+    }),
   ]
 })

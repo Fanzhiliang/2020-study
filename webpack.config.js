@@ -3,8 +3,10 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 // 打包时复制文件到打包目录
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+
 // 处理 vue
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+
 
 // 静态文件目录
 const StaticPath = './public'
@@ -56,18 +58,7 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        test: /\.(js|jsx)$/,
-        use: 'babel-loader',
-        exclude: path.resolve('node_modules'),
-        include: path.resolve('src')
-      },
-      {
-        test: /\.vue$/,
-        use: 'vue-loader',
-        include: path.resolve('src')
-      },
-      //处理文件
+      // 处理文件
       {
         test: /\.(png|jpg|gif)$/i,
         use: [
@@ -80,7 +71,13 @@ module.exports = {
             }
           }
         ]
-      }
+      },
+      // 处理 .vue 文件
+      {
+        test: /\.vue$/,
+        use: 'vue-loader',
+        include: path.resolve('src')
+      },
     ]
   },
   plugins: [
@@ -105,6 +102,7 @@ module.exports = {
         to: path.resolve(__dirname, BuildPath)
       }
     ]),
+    // 解析 .vue 文件
     new VueLoaderPlugin()
   ]
 }
