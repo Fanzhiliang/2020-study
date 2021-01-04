@@ -1,6 +1,6 @@
 const path = require('path')
 const { DllPath } = require('./config')
-const Mode = 'development'
+const Mode = 'production'
 
 const DllPlugin = require('webpack/lib/DllPlugin')
 

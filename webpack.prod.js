@@ -15,6 +15,8 @@ const TerserWebpackPlugin = require("terser-webpack-plugin")
 const Happypack = require('happypack')
 //  开启多进程压缩 js 代码
 const WebpackParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
+// 打包时清除不需要的文件
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 
 module.exports = merge(Base, {
@@ -148,5 +150,7 @@ module.exports = merge(Base, {
         }
       }
     }),
+    // 打包时清除不需要的文件
+    new CleanWebpackPlugin(),
   ]
 })

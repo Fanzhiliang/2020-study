@@ -17,7 +17,6 @@ module.exports = merge(Base, {
   //  入口文件
   entry: {
     index: [
-      // http://localhost:3000/
       'webpack-dev-server/client?http://'+ Host + ':' + Port,
       'webpack/hot/dev-server',
       path.resolve(SrcPath, 'index.js')
