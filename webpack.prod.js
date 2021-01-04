@@ -17,6 +17,8 @@ const Happypack = require('happypack')
 const WebpackParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
 // 打包时清除不需要的文件
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+// 开启 Scope Hosting
+const ModuleConcatenationPlugin = require('webpack/lib/optimize/ModuleConcatenationPlugin')
 
 
 module.exports = merge(Base, {
@@ -86,6 +88,10 @@ module.exports = merge(Base, {
         },
       }
     }
+  },
+  resolve: {
+    // 针对 Npm 中的第三方模块优先采用 jsnext:main 中指向 ES6 模块化语法的文件
+    mainFields: ['jsnext:main', 'browser', 'main']
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -157,5 +163,7 @@ module.exports = merge(Base, {
     }),
     // 打包时清除不需要的文件
     new CleanWebpackPlugin(),
+    // 开启 Scope Hosting
+    new ModuleConcatenationPlugin()
   ]
 })
