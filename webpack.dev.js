@@ -1,13 +1,53 @@
 const path = require('path')
 const webpack = require('webpack')
 const { merge } = require('webpack-merge')
-const base = require('./webpack.config.js')
+const Base = require('./webpack.config.js')
+const Mode = 'development'
+const Port = 3000
+const Host = 'localhost'
+const path = require('path')
+const { StaticPath, SrcPath } = require('./config')
 const PublicPath = '/'
 
-module.exports = merge(base, {
-  mode: 'development',
+// 热更新
+const HotModuleReplacementPlugin = require('webpack/lib/HotModuleReplacementPlugin')
+
+
+module.exports = merge(Base, {
+  mode: Mode,
+  //  入口文件
+  entry: {
+    index: [
+      // http://localhost:3000/
+      'webpack-dev-server/client?http://'+ Host + ':' + Port,
+      'webpack/hot/dev-server',
+      path.resolve(SrcPath, 'index.js')
+    ],
+  },
   output: {
     publicPath: PublicPath
+  },
+  devServer: {
+    port: Port,
+    // 自动打开
+    open: true,
+    // gzip 压缩
+    compress: true,
+    // 热更新
+    hot: true,
+    // 此路径下的打包文件可在浏览器中访问
+    contentBase: path.resolve(StaticPath),
+    // 代理
+    // proxy: {
+    //   [process.env.BASE_API]: {
+    //     target: '',
+    //     changeOrigin: true,
+    //     ws: false,
+    //     pathRewrite: {
+    //       ['^' + process.env.BASE_API]: ''
+    //     }
+    //   }
+    // }
   },
   module: {
     rules: [
@@ -34,9 +74,11 @@ module.exports = merge(base, {
   },
   plugins: [
     new webpack.DefinePlugin({
-      NODE_ENV: "'development'",
-      BASE_API: "'/dev'",
-      BASE_URL: "'" + PublicPath + "'"
-    })
+      NODE_ENV: "'" + Mode + "'",
+      BASE_URL: "'" + PublicPath + "'",
+      BASE_API: "'/dev'"
+    }),
+    // 热更新
+    new HotModuleReplacementPlugin()
   ]
 })

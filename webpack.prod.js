@@ -1,7 +1,9 @@
 const path = require('path')
 const webpack = require('webpack')
 const { merge } = require('webpack-merge')
-const base = require('./webpack.config.js')
+const Base = require('./webpack.config.js')
+const Mode = 'production'
+const PublicPath = './'
 
 //将css打包成.css文件，而不是放在style标签内
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
@@ -14,10 +16,9 @@ const Happypack = require('happypack')
 //  开启多进程压缩 js 代码
 const WebpackParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
 
-const PublicPath = './'
 
-module.exports = merge(base, {
-  mode: 'production',
+module.exports = merge(Base, {
+  mode: Mode,
   output: {
     publicPath: PublicPath
   },
@@ -86,9 +87,9 @@ module.exports = merge(base, {
   },
   plugins: [
     new webpack.DefinePlugin({
-      NODE_ENV: "'production'",
-      BASE_API: "'/prod'",
-      BASE_URL: "'" + PublicPath + "'"
+      NODE_ENV: "'" + Mode + "'",
+      BASE_URL: "'" + PublicPath + "'",
+      BASE_API: "'/prod'"
     }),
     // 抽离css
     new MiniCssExtractPlugin({

@@ -1,19 +1,13 @@
 const path = require('path')
+const { StaticPath, BuildPath, SrcPath } = require('./config')
+
 // 生成html的插件
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 // 打包时复制文件到打包目录
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-
 // 处理 vue
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
-
-// 静态文件目录
-const StaticPath = './public'
-// 打包文件目录
-const BuildPath = './dist'
-// src文件目录
-const SrcPath = './src'
 
 module.exports = {
   //  入口文件
@@ -29,26 +23,6 @@ module.exports = {
     // [name]：多入口文件名
     // [hash]：hash值
     filename: 'static/js/[name].[hash].js'
-  },
-  devServer: {
-    port: 3000,
-    // 自动打开
-    open: true,
-    // gzip 压缩
-    compress: true,
-    // 此路径下的打包文件可在浏览器中访问
-    contentBase: path.resolve(StaticPath),
-    // 代理
-    // proxy: {
-    //   [process.env.BASE_API]: {
-    //     target: '',
-    //     changeOrigin: true,
-    //     ws: false,
-    //     pathRewrite: {
-    //       ['^' + process.env.BASE_API]: ''
-    //     }
-    //   }
-    // }
   },
   resolve: {
     extensions: ['.js', '.jsx'],
