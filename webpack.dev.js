@@ -5,7 +5,6 @@ const Base = require('./webpack.config.js')
 const Mode = 'development'
 const Port = 3000
 const Host = 'localhost'
-const path = require('path')
 const { StaticPath, SrcPath } = require('./config')
 const PublicPath = '/'
 
@@ -79,6 +78,6 @@ module.exports = merge(Base, {
       BASE_API: "'/dev'"
     }),
     // 热更新
-    new HotModuleReplacementPlugin()
+    new HotModuleReplacementPlugin(),
   ]
 })

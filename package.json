@@ -40,6 +40,7 @@
     "dev": "webpack-dev-server --config webpack.dev.js",
     "dev:prod": "webpack-dev-server --config webpack.prod.js",
     "build": "webpack --config webpack.prod.js",
+    "dll": "webpack --config webpack.dll.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

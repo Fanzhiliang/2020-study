@@ -1,5 +1,5 @@
 const path = require('path')
-const { StaticPath, BuildPath, SrcPath } = require('./config')
+const { StaticPath, BuildPath, SrcPath, DllPath } = require('./config')
 
 // 生成html的插件
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -7,6 +7,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 // 处理 vue
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+// 动态链接库
+const DllReferencePlugin = require('webpack/lib/DllReferencePlugin')
 
 
 module.exports = {
@@ -77,6 +79,10 @@ module.exports = {
       }
     ]),
     // 解析 .vue 文件
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
+    // 使用 vue 的动态链接库
+    new DllReferencePlugin({
+      manifest: require(path.join(__dirname, DllPath, 'vue.manifest.json'))
+    })
   ]
 }
