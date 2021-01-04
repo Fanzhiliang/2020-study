@@ -28,10 +28,6 @@ div.classList.add('bg')
 
 document.body.appendChild(div)
 
-// const jsxTest = <div>sb</div>
-
-// console.log(jsxTest)
-
 // 环境变量
 console.log('环境变量：')
 console.log(process.env)

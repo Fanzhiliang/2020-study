@@ -11,11 +11,16 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "@babel/runtime-corejs3": "^7.12.5",
+    "core-js": "^3.8.2",
     "lodash": "^4.17.20",
+    "regenerator-runtime": "^0.13.7",
     "vue": "^2.6.12"
   },
   "devDependencies": {
+    "@babel/cli": "^7.12.10",
     "@babel/core": "^7.12.10",
+    "@babel/plugin-transform-runtime": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
     "autoprefixer": "^7.2.6",
     "babel-loader": "^8.0.0-beta.0",
