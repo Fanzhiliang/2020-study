@@ -72,9 +72,14 @@ module.exports = merge(Base, {
   },
   plugins: [
     new webpack.DefinePlugin({
-      NODE_ENV: "'" + Mode + "'",
       BASE_URL: "'" + PublicPath + "'",
-      BASE_API: "'/dev'"
+      process: {
+        env: {
+          NODE_ENV: "'" + Mode + "'",
+          BASE_URL: "'" + PublicPath + "'",
+          BASE_API: "'/dev'",
+        }
+      }
     }),
     // 热更新
     new HotModuleReplacementPlugin(),

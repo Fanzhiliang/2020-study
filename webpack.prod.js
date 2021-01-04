@@ -89,9 +89,14 @@ module.exports = merge(Base, {
   },
   plugins: [
     new webpack.DefinePlugin({
-      NODE_ENV: "'" + Mode + "'",
       BASE_URL: "'" + PublicPath + "'",
-      BASE_API: "'/prod'"
+      process: {
+        env: {
+          NODE_ENV: "'" + Mode + "'",
+          BASE_URL: "'" + PublicPath + "'",
+          BASE_API: "'/prod'",
+        }
+      }
     }),
     // 抽离css
     new MiniCssExtractPlugin({

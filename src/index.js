@@ -34,8 +34,7 @@ document.body.appendChild(div)
 
 // 环境变量
 console.log('环境变量：')
-console.log(NODE_ENV)
-console.log(BASE_API)
+console.log(process.env)
 
 // 异步加载js
 
