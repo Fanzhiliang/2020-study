@@ -11,18 +11,17 @@ const PublicPath = '/'
 // 热更新
 const HotModuleReplacementPlugin = require('webpack/lib/HotModuleReplacementPlugin')
 
-
 module.exports = merge(Base, {
   mode: Mode,
   //  入口文件
   entry: {
     index: [
-      'webpack-dev-server/client?http://'+ Host + ':' + Port,
-      'webpack/hot/dev-server'
+      'webpack-dev-server/client?http://' + Host + ':' + Port,
+      'webpack/hot/dev-server',
     ],
   },
   output: {
-    publicPath: PublicPath
+    publicPath: PublicPath,
   },
   devServer: {
     port: Port,
@@ -55,7 +54,7 @@ module.exports = merge(Base, {
         use: 'babel-loader?cacheDirectory',
         // 明确范围
         exclude: path.resolve('node_modules'),
-        include: path.resolve('src')
+        include: path.resolve('src'),
       },
       {
         test: /\.(css|sass|scss)$/,
@@ -64,23 +63,23 @@ module.exports = merge(Base, {
           'style-loader',
           'css-loader',
           'postcss-loader',
-          'sass-loader'
-        ]
+          'sass-loader',
+        ],
       },
-    ]
+    ],
   },
   plugins: [
     new webpack.DefinePlugin({
-      BASE_URL: "'" + PublicPath + "'",
+      BASE_URL: '\'' + PublicPath + '\'',
       process: {
         env: {
-          NODE_ENV: "'" + Mode + "'",
-          BASE_URL: "'" + PublicPath + "'",
-          BASE_API: "'/dev'",
-        }
-      }
+          NODE_ENV: '\'' + Mode + '\'',
+          BASE_URL: '\'' + PublicPath + '\'',
+          BASE_API: '\'/dev\'',
+        },
+      },
     }),
     // 热更新
     new HotModuleReplacementPlugin(),
-  ]
+  ],
 })

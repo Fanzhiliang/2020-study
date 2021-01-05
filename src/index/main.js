@@ -48,13 +48,15 @@ setTimeout(() => {
 // 处理vue
 import Vue from 'vue'
 import App from './App.vue'
+import router from './router'
 
 new Vue({
+  router,
   render() {
-    const span = <span>sb777</span>
+    const title = <h2>Webpack Vue 实例测试</h2>
 
     return <div>
-      { span }
+      { title }
       <App />
     </div>
   }

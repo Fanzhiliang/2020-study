@@ -1,5 +1,14 @@
 <template>
-  <div class="msg">{{ msg }}</div>
+  <div id="app">
+    <div class="msg">
+      <ul class="links">
+        <li class="link" v-for="(item, index) in links" :key="index">
+          <router-link :to="{ name: item.name }">{{ item.title }}</router-link>
+        </li>
+      </ul>
+      <router-view />
+    </div>
+  </div>
 </template>
 
 <script>
@@ -7,7 +16,10 @@ export default {
   name: 'App',
   data() {
     return {
-      msg: '这个是index组件',
+      links: [
+        { title: '首页', name: 'Home' },
+        { title: '关于', name: 'About' }
+      ],
     }
   },
 }
@@ -18,5 +30,22 @@ export default {
 
   .msg {
     color: $color;
+  }
+
+  .links {
+    list-style: none;
+    padding: 0 10px;
+    .link {
+      list-style: none;
+      display: inline-block;
+      margin: 0 10px;
+      a {
+        color: #F0F0F0;
+
+        &.router-link-exact-active {
+          color: #000;
+        }
+      }
+    }
   }
 </style>
