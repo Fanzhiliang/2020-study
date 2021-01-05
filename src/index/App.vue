@@ -4,12 +4,12 @@
 
 <script>
 export default {
-  name: 'Index',
+  name: 'App',
   data() {
     return {
-      msg: '这个是index组件'
+      msg: '这个是index组件',
     }
-  }
+  },
 }
 </script>
 

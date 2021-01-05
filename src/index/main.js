@@ -1,6 +1,6 @@
 // 导入样式
-import './style/reset.css'
-import './style/index.scss'
+import '@/style/reset.css'
+import '@/style/index.scss'
 
 // 导入模块
 import { Compute } from '@/utils'
@@ -15,7 +15,7 @@ import _ from 'lodash'
 console.log(_.add(0.1, 0.2))
 
 // 处理图片
-import img3 from './assets/img-3.jpg'
+import img3 from '@/assets/img-3.jpg'
 
 const img = new Image()
 img.width = 100
@@ -35,7 +35,7 @@ console.log(process.env)
 // 异步加载js
 
 setTimeout(() => {
-  import(/* webpackChunkName: "asyncPlugin" */ './plugins/async-plugin.js').then(res => {
+  import(/* webpackChunkName: "asyncPlugin" */ '@/plugins/async-plugin.js').then(res => {
     console.log(res.default.message)
   })
 
@@ -47,7 +47,7 @@ setTimeout(() => {
 
 // 处理vue
 import Vue from 'vue'
-import App from './index.vue'
+import App from './App.vue'
 
 new Vue({
   render() {

@@ -5,7 +5,7 @@ const Base = require('./webpack.config.js')
 const Mode = 'development'
 const Port = 3000
 const Host = 'localhost'
-const { StaticPath, SrcPath } = require('./config')
+const { StaticPath } = require('./config')
 const PublicPath = '/'
 
 // 热更新
@@ -18,8 +18,7 @@ module.exports = merge(Base, {
   entry: {
     index: [
       'webpack-dev-server/client?http://'+ Host + ':' + Port,
-      'webpack/hot/dev-server',
-      path.resolve(SrcPath, 'index.js')
+      'webpack/hot/dev-server'
     ],
   },
   output: {

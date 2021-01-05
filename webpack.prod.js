@@ -5,12 +5,12 @@ const Base = require('./webpack.config.js')
 const Mode = 'production'
 const PublicPath = './'
 
-//将css打包成.css文件，而不是放在style标签内
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
-//压缩css代码
-const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin")
-//使用上面的插件后，js代码就不压缩了，要用这插件
-const TerserWebpackPlugin = require("terser-webpack-plugin")
+// 将css打包成.css文件，而不是放在style标签内
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+// 压缩css代码
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+// 使用上面的插件后，js代码就不压缩了，要用这插件
+const TerserWebpackPlugin = require('terser-webpack-plugin')
 // 开启多进程打包
 const Happypack = require('happypack')
 //  开启多进程压缩 js 代码
@@ -20,11 +20,10 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 // 开启 Scope Hosting
 const ModuleConcatenationPlugin = require('webpack/lib/optimize/ModuleConcatenationPlugin')
 
-
 module.exports = merge(Base, {
   mode: Mode,
   output: {
-    publicPath: PublicPath
+    publicPath: PublicPath,
   },
   module: {
     rules: [
@@ -35,7 +34,7 @@ module.exports = merge(Base, {
         use: 'Happypack/loader?id=babel',
         // 明确范围
         exclude: path.resolve('node_modules'),
-        include: path.resolve('src')
+        include: path.resolve('src'),
       },
       {
         test: /\.(css|sass|scss)$/,
@@ -45,15 +44,15 @@ module.exports = merge(Base, {
             loader: MiniCssExtractPlugin.loader,
             options: {
               // 根据抽离出来的css文件路径来设置
-              publicPath: '../../'
-            }
+              publicPath: '../../',
+            },
           },
           'css-loader',
           'postcss-loader',
-          'sass-loader'
-        ]
+          'sass-loader',
+        ],
       },
-    ]
+    ],
   },
   optimization: {
     // 压缩配置
@@ -77,36 +76,36 @@ module.exports = merge(Base, {
           // 大小限制：大于多少才抽离
           minSize: 0,
           // 复用限制：用了多少次才抽离
-          minChunks: 1
+          minChunks: 1,
         },
         // 公共模块
         common: {
           name: 'common',
           priority: 1,
           minSize: 0,
-          minChunks: 2
+          minChunks: 2,
         },
-      }
-    }
+      },
+    },
   },
   resolve: {
     // 针对 Npm 中的第三方模块优先采用 jsnext:main 中指向 ES6 模块化语法的文件
-    mainFields: ['jsnext:main', 'browser', 'main']
+    mainFields: ['jsnext:main', 'browser', 'main'],
   },
   plugins: [
     new webpack.DefinePlugin({
-      BASE_URL: "'" + PublicPath + "'",
+      BASE_URL: '\'' + PublicPath + '\'',
       process: {
         env: {
-          NODE_ENV: "'" + Mode + "'",
-          BASE_URL: "'" + PublicPath + "'",
-          BASE_API: "'/prod'",
-        }
-      }
+          NODE_ENV: '\'' + Mode + '\'',
+          BASE_URL: '\'' + PublicPath + '\'',
+          BASE_API: '\'/prod\'',
+        },
+      },
     }),
     // 抽离css
     new MiniCssExtractPlugin({
-      filename: 'static/css/main.[hash].css'
+      filename: 'static/css/main.[hash].css',
     }),
     // 开启多进程打包
     new Happypack({
@@ -114,9 +113,9 @@ module.exports = merge(Base, {
       use: [
         {
           // cacheDirectory：开启缓存
-          loader: 'babel-loader?cacheDirectory'
-        }
-      ]
+          loader: 'babel-loader?cacheDirectory',
+        },
+      ],
     }),
     // 开启多进程压缩 js 代码
     new WebpackParallelUglifyPlugin({
@@ -136,7 +135,7 @@ module.exports = merge(Base, {
           /*
            是否保留代码中的注释，默认为保留，为了达到更好的压缩效果，可以设置为false
           */
-          comments: false
+          comments: false,
         },
         /*
           是否在UglifyJS删除没有用到的代码时输出警告信息，默认为输出，可以设置为false关闭这些作用
@@ -157,13 +156,13 @@ module.exports = merge(Base, {
            是否提取出现了多次但是没有定义成变量去引用的静态值，比如将 x = 'xxx'; y = 'xxx'  转换成
            var a = 'xxxx'; x = a; y = a; 默认为不转换，为了达到更好的压缩效果，可以设置为false
           */
-          reduce_vars: true
-        }
-      }
+          reduce_vars: true,
+        },
+      },
     }),
     // 打包时清除不需要的文件
     new CleanWebpackPlugin(),
     // 开启 Scope Hosting
-    new ModuleConcatenationPlugin()
-  ]
+    new ModuleConcatenationPlugin(),
+  ],
 })
