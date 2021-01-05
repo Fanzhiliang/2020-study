@@ -1,0 +1,66 @@
+@mixin clearfix {
+  zoom: 1;
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+    visibility: hidden;
+    height: 0;
+  }
+}
+
+@mixin scrollBar {
+  &::-webkit-scrollbar-track-piece {
+    background: #d3dce6;
+  }
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #99a9bf;
+    border-radius: 20px;
+  }
+}
+
+@mixin relative {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+// 单行省略号
+@mixin ellipsis{
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+// 多行省略号
+@mixin ellipsisMultiline($number: 1, $lineHeight: 1em) {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: $number;
+  max-height: $number * $lineHeight;
+  line-height: $lineHeight;
+}
+
+// placeholder
+@mixin placeholder($color: #889aa4) {
+  input::-webkit-input-placeholder { /* WebKit browsers */
+    color: $color;
+  }
+  input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: $color;
+  }
+  input::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: $color;
+  }
+  input:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: $color;
+  }
+}

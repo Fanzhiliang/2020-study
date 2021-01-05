@@ -49,7 +49,12 @@ module.exports = merge(Base, {
           },
           'css-loader',
           'postcss-loader',
-          'sass-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              additionalData: '@import "@/styles/index.scss";'
+            }
+          },
         ],
       },
     ],

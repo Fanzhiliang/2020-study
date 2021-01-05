@@ -29,6 +29,7 @@ export default {
   $color: #FFFFFF;
 
   .msg {
+    @include ellipsis;
     color: $color;
   }
 

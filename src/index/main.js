@@ -1,6 +1,6 @@
 // 导入样式
-import '@/style/reset.css'
-import '@/style/index.scss'
+import '@/styles/reset.css'
+import './styles/index.scss'
 
 // 导入模块
 import { Compute } from '@/utils'
@@ -58,6 +58,7 @@ new Vue({
     return <div>
       { title }
       <App />
+      <div class="block-20" />
     </div>
   }
 }).$mount('#app')
