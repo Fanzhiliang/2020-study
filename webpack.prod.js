@@ -3,6 +3,7 @@ const webpack = require('webpack')
 const { merge } = require('webpack-merge')
 const Base = require('./webpack.config.js')
 const Mode = 'production'
+const { StaticPath, BuildPath } = require('./config')
 const PublicPath = './'
 
 // 将css打包成.css文件，而不是放在style标签内
@@ -15,10 +16,14 @@ const TerserWebpackPlugin = require('terser-webpack-plugin')
 const Happypack = require('happypack')
 //  开启多进程压缩 js 代码
 const WebpackParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
+// 打包时复制文件到打包目录
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 // 打包时清除不需要的文件
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 // 开启 Scope Hosting
 const ModuleConcatenationPlugin = require('webpack/lib/optimize/ModuleConcatenationPlugin')
+// 插入标签
+const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin')
 
 module.exports = merge(Base, {
   mode: Mode,
@@ -52,8 +57,8 @@ module.exports = merge(Base, {
           {
             loader: 'sass-loader',
             options: {
-              additionalData: '@import "@/styles/index.scss";'
-            }
+              additionalData: '@import "@/styles/index.scss";',
+            },
           },
         ],
       },
@@ -96,6 +101,11 @@ module.exports = merge(Base, {
   resolve: {
     // 针对 Npm 中的第三方模块优先采用 jsnext:main 中指向 ES6 模块化语法的文件
     mainFields: ['jsnext:main', 'browser', 'main'],
+  },
+  externals: {
+    vue: 'Vue',
+    'vue-router': 'VueRouter',
+    vuex: 'Vuex',
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -165,9 +175,27 @@ module.exports = merge(Base, {
         },
       },
     }),
+    new CopyWebpackPlugin([
+      // 把 静态 文件夹内的内容复制到 打包 文件夹下
+      {
+        from: path.resolve(__dirname, StaticPath),
+        to: path.resolve(__dirname, BuildPath),
+      },
+    ]),
     // 打包时清除不需要的文件
     new CleanWebpackPlugin(),
     // 开启 Scope Hosting
     new ModuleConcatenationPlugin(),
+    // 插入标签
+    new HtmlWebpackTagsPlugin({
+      tags: [
+        'https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js',
+        'https://cdn.jsdelivr.net/npm/vue-router@3.4.9/dist/vue-router.min.js',
+        'https://cdn.jsdelivr.net/npm/vuex@3.6.0/dist/vuex.min.js',
+        'https://cdn.jsdelivr.net/npm/axios@0.19.0/dist/axios.min.js',
+      ],
+      append: false,
+      publicPath: '',
+    }),
   ],
 })

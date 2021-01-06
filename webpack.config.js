@@ -1,14 +1,10 @@
 const path = require('path')
-const { StaticPath, BuildPath, SrcPath, DllPath } = require('./config')
+const { StaticPath, BuildPath, SrcPath } = require('./config')
 
 // 生成html的插件
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-// 打包时复制文件到打包目录
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 // 处理 vue
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
-// 动态链接库
-const DllReferencePlugin = require('webpack/lib/DllReferencePlugin')
 
 module.exports = {
   //  入口文件
@@ -75,18 +71,7 @@ module.exports = {
       // 只引用某些入口文件，这些入口的值要在 entry 设置
       chunks: ['readme'],
     }),
-    new CopyWebpackPlugin([
-      // 把 静态 文件夹内的内容复制到 打包 文件夹下
-      {
-        from: path.resolve(__dirname, StaticPath),
-        to: path.resolve(__dirname, BuildPath),
-      },
-    ]),
     // 解析 .vue 文件
     new VueLoaderPlugin(),
-    // 使用 vue 的动态链接库
-    new DllReferencePlugin({
-      manifest: require(path.join(__dirname, DllPath, 'vue.manifest.json')),
-    }),
   ],
 }

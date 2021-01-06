@@ -5,11 +5,15 @@ const Base = require('./webpack.config.js')
 const Mode = 'development'
 const Port = 3000
 const Host = 'localhost'
-const { StaticPath } = require('./config')
+const { StaticPath, DllPath } = require('./config')
 const PublicPath = '/'
 
 // 热更新
 const HotModuleReplacementPlugin = require('webpack/lib/HotModuleReplacementPlugin')
+// 动态链接库
+const DllReferencePlugin = require('webpack/lib/DllReferencePlugin')
+// 插入标签
+const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin')
 
 module.exports = merge(Base, {
   mode: Mode,
@@ -66,8 +70,8 @@ module.exports = merge(Base, {
           {
             loader: 'sass-loader',
             options: {
-              additionalData: '@import "@/styles/index.scss";'
-            }
+              additionalData: '@import "@/styles/index.scss";',
+            },
           },
         ],
       },
@@ -86,5 +90,16 @@ module.exports = merge(Base, {
     }),
     // 热更新
     new HotModuleReplacementPlugin(),
+    // 使用动态链接库
+    new DllReferencePlugin({
+      manifest: require(path.join(__dirname, StaticPath, DllPath, 'WebpackDll.manifest.json')),
+    }),
+    // 插入标签
+    new HtmlWebpackTagsPlugin({
+      tags: [
+        path.join(DllPath, 'WebpackDll.dll.js'),
+      ],
+      append: false,
+    }),
   ],
 })

@@ -18,7 +18,7 @@ export default {
     return {
       links: [
         { title: '首页', name: 'Home' },
-        { title: '关于', name: 'About' }
+        { title: '关于', name: 'About' },
       ],
     }
   },
@@ -41,10 +41,10 @@ export default {
       display: inline-block;
       margin: 0 10px;
       a {
-        color: #F0F0F0;
+        color: #000;
 
         &.router-link-exact-active {
-          color: #000;
+          color: #F0F0F0;
         }
       }
     }
