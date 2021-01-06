@@ -3,7 +3,7 @@ const webpack = require('webpack')
 const { merge } = require('webpack-merge')
 const Base = require('./webpack.config.js')
 const Mode = 'production'
-const { StaticPath, BuildPath } = require('./config')
+const { StaticPath, BuildPath, DllPath } = require('./config')
 const PublicPath = './'
 
 // 将css打包成.css文件，而不是放在style标签内
@@ -183,7 +183,10 @@ module.exports = merge(Base, {
       },
     ]),
     // 打包时清除不需要的文件
-    new CleanWebpackPlugin(),
+    new CleanWebpackPlugin({
+      // 打包时不把 dll 文件打包进来
+      cleanAfterEveryBuildPatterns: [DllPath],
+    }),
     // 开启 Scope Hosting
     new ModuleConcatenationPlugin(),
     // 插入标签
