@@ -60,7 +60,7 @@ new Vue({
     return <div>
       { title }
       <App />
-      <div class="block-20" />
+      <div class='block-20' />
     </div>
-  }
+  },
 }).$mount('#app')

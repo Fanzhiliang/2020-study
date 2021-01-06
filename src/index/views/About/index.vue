@@ -11,8 +11,8 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'About',
   computed: {
-    ...mapGetters(['token'])
-  }
+    ...mapGetters(['token']),
+  },
 }
 </script>
 

@@ -11,7 +11,7 @@ export default {
   name: 'Home',
   data() {
     return {
-      value: ''
+      value: '',
     }
   },
   methods: {
@@ -20,8 +20,8 @@ export default {
         this.$store.commit('setToken', this.value)
         this.value = ''
       }
-    }
-  }
+    },
+  },
 }
 </script>
 

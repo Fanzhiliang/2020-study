@@ -1,13 +1,13 @@
 
 const user = {
   state: {
-    token: ''
+    token: '',
   },
 
   mutations: {
     setToken(state, data) {
       state.token = data
-    }
+    },
   },
 
   actions: {
@@ -16,8 +16,8 @@ const user = {
         commit('setToken', 'token123456789')
         resolve()
       })
-    }
-  }
+    },
+  },
 }
 
 export default user

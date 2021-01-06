@@ -10,16 +10,16 @@ module.exports = {
   ],
   'parserOptions': {
     'ecmaVersion': 12,
+    'parser': 'babel-eslint',
   },
   'plugins': [
     'vue',
-    'jsx',
   ],
   'rules': {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    semi: ['error', 'never'],
-    quotes: ['error', 'single'],
+    'semi': ['error', 'never'],
+    'quotes': ['error', 'single'],
     'comma-dangle': [1, 'always-multiline'],
     '@typescript-eslint/no-explicit-any': ['off'],
     '@typescript-eslint/no-empty-function': ['off'],
@@ -188,7 +188,7 @@ module.exports = {
     'yoda': [2, 'never'],
     'prefer-const': 2,
     'object-curly-spacing': [2, 'always', {
-      objectsInObjects: false,
+      'objectsInObjects': false,
     }],
     'array-bracket-spacing': [2, 'never'],
   },
