@@ -12,10 +12,10 @@ module.exports = {
   entry: {
     // 此处写成数组为了和 webpack.dev.js 的热更新配置合并
     index: [
-      path.resolve(SrcPath, 'index', 'main.js'),
+      path.resolve(SrcPath, 'index', 'main.ts'),
     ],
-    readme: [
-      path.resolve(SrcPath, 'readme', 'main.js'),
+    resume: [
+      path.resolve(SrcPath, 'resume', 'main.js'),
     ],
   },
   // 打包路径
@@ -27,7 +27,7 @@ module.exports = {
     filename: 'static/js/[name].[hash].js',
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.vue', '.ts', '.tsx', '.json'],
     alias: {
       '@': path.resolve(SrcPath),
     },
@@ -54,6 +54,21 @@ module.exports = {
         use: 'vue-loader',
         include: path.resolve('src'),
       },
+      // 处理 ts 语法
+      {
+        test: /\.(ts|tsx)$/,
+        use: {
+          loader: 'ts-loader',
+          options: {
+            appendTsSuffixTo: [/\.vue$/],
+            transpileOnly: true,
+            happyPackMode: false,
+          },
+        },
+        // 明确范围
+        exclude: path.resolve('node_modules'),
+        include: path.resolve('src'),
+      },
     ],
   },
   plugins: [
@@ -66,10 +81,10 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, StaticPath, 'index.html'),
-      filename: 'readme.html',
+      filename: 'resume.html',
       title: '简历',
       // 只引用某些入口文件，这些入口的值要在 entry 设置
-      chunks: ['readme'],
+      chunks: ['resume'],
     }),
     // 解析 .vue 文件
     new VueLoaderPlugin(),

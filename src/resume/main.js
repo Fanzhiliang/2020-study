@@ -1,7 +1,7 @@
-console.log('readme!!!!!!!!!!!!!!!!!!!!!!!')
-
 // 导入模块
 import { Compute } from '@/utils'
+
+console.log('resume!!!!!!!!!!!!!!!!!!!!!!!')
 
 console.log(Compute.add(1, 2.1))
 

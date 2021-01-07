@@ -6,22 +6,22 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator'
+import { UserModule } from '../../store/modules/user'
+
+@Component({
   name: 'Home',
-  data() {
-    return {
-      value: '',
+})
+export default class extends Vue {
+  value = ''
+
+  sure() {
+    if (this.value) {
+      UserModule.setToken(this.value)
+      this.value = ''
     }
-  },
-  methods: {
-    sure() {
-      if (this.value) {
-        this.$store.commit('setToken', this.value)
-        this.value = ''
-      }
-    },
-  },
+  }
 }
 </script>
 

@@ -5,14 +5,17 @@
   </div>
 </template>
 
-<script>
-import { mapGetters } from 'vuex'
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator'
+import { UserModule } from '../../store/modules/user'
 
-export default {
+@Component({
   name: 'About',
-  computed: {
-    ...mapGetters(['token']),
-  },
+})
+export default class extends Vue {
+  get token() {
+    return UserModule.token
+  }
 }
 </script>
 

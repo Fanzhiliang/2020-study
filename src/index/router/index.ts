@@ -1,21 +1,21 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
+import VueRouter, { RouteConfig } from 'vue-router'
 
 Vue.use(VueRouter)
 
-const routes = [
+const routes: RouteConfig[] = [
   {
     path: '/',
     name: 'Home',
     component: () => import('../views/Home/index.vue'),
-    meta: { title: '首页' }
+    meta: { title: '首页' },
   },
   {
     path: '/About',
     name: 'About',
     component: () => import('../views/About/index.vue'),
-    meta: { title: '关于' }
-  }
+    meta: { title: '关于' },
+  },
 ]
 
 const router = new VueRouter({

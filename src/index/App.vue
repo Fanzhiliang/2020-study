@@ -11,17 +11,17 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator'
+
+@Component({
   name: 'App',
-  data() {
-    return {
-      links: [
-        { title: '首页', name: 'Home' },
-        { title: '关于', name: 'About' },
-      ],
-    }
-  },
+})
+export default class extends Vue {
+  public links: any[] = [
+    { title: '首页', name: 'Home' },
+    { title: '关于', name: 'About' },
+  ]
 }
 </script>
 

@@ -3,19 +3,29 @@ import '@/styles/reset.css'
 import './styles/index.scss'
 
 // 导入模块
-import { Compute } from '@/utils'
+import { Compute } from '../utils'
+
+// 导入第三方模块
+import _ from 'lodash'
+
+// 处理图片
+import img3 from '@/assets/img-3.jpg'
+
+// 处理vue
+import Vue from 'vue'
+import App from './App.vue'
+import router from './router'
+import store from './store'
+
+// typescript测试
+
+import { sum } from './utils/index'
 
 console.log(Compute)
 
 console.log(Compute.add(0.1, 0.2))
 
-// 导入第三方模块
-import _ from 'lodash'
-
 console.log(_.add(0.1, 0.2))
-
-// 处理图片
-import img3 from '@/assets/img-3.jpg'
 
 const img = new Image()
 img.width = 100
@@ -35,7 +45,7 @@ console.log(process.env)
 // 异步加载js
 
 setTimeout(() => {
-  import(/* webpackChunkName: "asyncPlugin" */ '@/plugins/async-plugin.js').then(res => {
+  import(/* webpackChunkName: "asyncPlugin" */ '../plugins/async-plugin').then(res => {
     console.log(res.default.message)
   })
 
@@ -45,22 +55,19 @@ setTimeout(() => {
   // })
 }, 1500)
 
-// 处理vue
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
-
 new Vue({
   router,
   store,
-  render() {
-    const title = <h2>Webpack Vue 实例测试</h2>
+  // render() {
+  //   const title = <h2>Webpack Vue 实例测试</h2>
 
-    return <div>
-      { title }
-      <App />
-      <div class='block-20' />
-    </div>
-  },
+  //   return <div>
+  //     { title }
+  //     <App />
+  //     <div class='block-20' />
+  //   </div>
+  // },
+  render: h => h(App),
 }).$mount('#app')
+
+console.log(sum(1, 2))

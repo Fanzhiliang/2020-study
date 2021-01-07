@@ -75,6 +75,21 @@ module.exports = merge(Base, {
           },
         ],
       },
+      {
+        test: /\.(js|vue|ts|tsx|jsx)$/,
+        use: {
+          loader: 'eslint-loader',
+          options: {
+            fix: false,
+            extensions: ['.js', '.jsx', '.vue', '.ts', '.tsx'],
+            cache: false,
+            emitWarning: true,
+            emitError: false,
+          },
+        },
+        enforce: 'pre',
+        exclude: path.resolve('node_modules'),
+      },
     ],
   },
   plugins: [
