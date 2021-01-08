@@ -9,4 +9,4 @@ export const typeOptions: string[] = ['', 'flex']
 
 export const justifyOptions: string[] = ['start', 'end', 'center', 'space-around', 'space-between']
 
-export const alignOptions: string[] = ['start', 'end', 'center']
+export const alignOptions: string[] = ['start', 'end', 'center', 'stretch']

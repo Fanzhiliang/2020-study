@@ -1,7 +1,3 @@
-// 导入样式
-import '@/styles/reset.css'
-// import './styles/index.scss'
-
 // 导入模块
 import { Compute } from '../utils'
 

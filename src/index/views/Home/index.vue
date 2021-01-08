@@ -8,10 +8,10 @@
 
     <div class="grid-panel">
       <my-row>
-        <my-col :span="8" :sm="24" :xs="24">
+        <my-col :span="6" :xs="24">
           <div class="block block-head">头部</div>
         </my-col>
-        <my-col :span="16" :sm="24" :xs="24">
+        <my-col :span="18" :xs="24">
           <div class="block block-main">内容</div>
         </my-col>
       </my-row>
