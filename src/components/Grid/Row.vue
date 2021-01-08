@@ -53,6 +53,8 @@ export default class extends Vue {
       'align-items': this.align,
       'margin-left': -this.gutter + 'px',
       'margin-right': -this.gutter + 'px',
+      'flex-wrap': 'wrap',
+      'white-space': 'normal',
     }
   }
 }

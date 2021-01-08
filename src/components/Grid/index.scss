@@ -68,7 +68,7 @@ $screen-xl-min: 1920px;
   @include gird-pull();
   display: inline-block;
   letter-spacing: normal;
-  font-size: normal;
+  font-size: 16px;
 }
 
 // 超小屏幕(手机)
