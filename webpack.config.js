@@ -1,12 +1,13 @@
 const path = require('path')
 const { StaticPath, BuildPath, SrcPath } = require('./config')
+const { getAdditionalData } = require('./webpack.utils')
 
 // 生成html的插件
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 // 处理 vue
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
-module.exports = {
+const Base = {
   //  入口文件
   // entry: path.resolve(SrcPath, 'index.js'),
   entry: {
@@ -15,7 +16,7 @@ module.exports = {
       path.resolve(SrcPath, 'index', 'main.ts'),
     ],
     resume: [
-      path.resolve(SrcPath, 'resume', 'main.js'),
+      path.resolve(SrcPath, 'resume', 'main.ts'),
     ],
   },
   // 打包路径
@@ -44,6 +45,24 @@ module.exports = {
               outputPath: 'static/img/',
               // 小于200kb用base64解析
               limit: 200 * 1024,
+            },
+          },
+        ],
+      },
+      // 处理样式
+      {
+        test: /\.(css|sass|scss)$/,
+        // 注意 loader 加载顺序和书写顺序是相反的
+        use: [
+          // 'style-loader',
+          'css-loader',
+          'postcss-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              // additionalData: '@import "@/styles/global.scss";',
+              // 设置多入口文件自动加载
+              additionalData: (content, loaderContext) => getAdditionalData(Base, content, loaderContext),
             },
           },
         ],
@@ -90,3 +109,5 @@ module.exports = {
     new VueLoaderPlugin(),
   ],
 }
+
+module.exports = Base

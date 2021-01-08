@@ -1,0 +1,118 @@
+// 超小屏幕(手机)
+$screen-xs-max: 767px;
+
+// 小屏幕(平板)
+$screen-sm-min: 768px;
+$screen-sm-max: 991px;
+
+// 中等屏幕(桌面显示器)
+$screen-md-min: 992px;
+$screen-md-max: 1199px;
+
+// 大屏幕(大桌面显示器)
+$screen-lg-min: 1200px;
+$screen-lg-max: 1919px;
+
+// 超大屏幕(超大桌面显示器)
+$screen-xl-min: 1920px;
+
+@mixin gird-width($size){
+  $i: 1;
+  @while $i <= 24 {
+    .my-col-#{$size}-#{$i} {
+      width: 100% * $i / 24;
+    }
+    $i: $i + 1;
+  }
+}
+
+@mixin gird-push($size: ""){
+  @if ($size != "") {
+    $size: $size + "-";
+  }
+  $i: 0;
+  @while $i <= 23 {
+    &-#{$size}push-#{$i} {
+      margin-left: 100% * $i / 24;
+    }
+    $i: $i + 1;
+  }
+}
+
+@mixin gird-pull($size: ""){
+  @if ($size != "") {
+    $size: $size + "-";
+  }
+  $i: 0;
+  @while $i <= 23 {
+    &-#{$size}pull-#{$i} {
+      margin-right: 100% * $i / 24;
+    }
+    $i: $i + 1;
+  }
+}
+
+.my-row, .my-row * {
+  box-sizing: border-box;
+}
+
+.my-row {
+  width: 100%;
+  display: inline-block;
+  letter-spacing: 0;
+  font-size: 0;
+}
+
+.my-col {
+  @include gird-push();
+  @include gird-pull();
+  display: inline-block;
+  letter-spacing: normal;
+  font-size: normal;
+}
+
+// 超小屏幕(手机)
+@media (max-width: $screen-xs-max) {
+  @include gird-width("xs");
+  .my-col {
+    @include gird-push("xs");
+    @include gird-pull("xs");
+  }
+}
+
+// 小屏幕(平板)
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+  @include gird-width("sm");
+  .my-col {
+    @include gird-push("sm");
+    @include gird-pull("sm");
+  }
+}
+
+// 中等屏幕(桌面显示器)
+@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+  @include gird-width("md");
+  .my-col {
+    @include gird-push("md");
+    @include gird-pull("md");
+  }
+}
+
+// 大屏幕(大桌面显示器)
+@media (min-width: $screen-lg-min) and (max-width: $screen-lg-max) {
+  @include gird-width("lg");
+  .my-col {
+    @include gird-push("lg");
+    @include gird-pull("lg");
+  }
+}
+
+// 超大屏幕(超大桌面显示器)
+@media (min-width: $screen-xl-min) {
+  @include gird-width("xl");
+  .my-col {
+    @include gird-push("xl");
+    @include gird-pull("xl");
+  }
+}
+

@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const { merge } = require('webpack-merge')
 const Base = require('./webpack.config.js')
+const { unshiftModuleRuleStyleLoader } = require('./webpack.utils')
 const Mode = 'development'
 const Port = 3000
 const Host = 'localhost'
@@ -60,21 +61,12 @@ module.exports = merge(Base, {
         exclude: path.resolve('node_modules'),
         include: path.resolve('src'),
       },
-      {
+      // 处理样式 将样式写入 style 标签
+      unshiftModuleRuleStyleLoader({
+        config: Base,
         test: /\.(css|sass|scss)$/,
-        // 注意 loader 加载顺序和书写顺序是相反的
-        use: [
-          'style-loader',
-          'css-loader',
-          'postcss-loader',
-          {
-            loader: 'sass-loader',
-            options: {
-              additionalData: '@import "@/styles/index.scss";',
-            },
-          },
-        ],
-      },
+        loader: 'style-loader',
+      }),
       {
         test: /\.(js|vue|ts|tsx|jsx)$/,
         use: {

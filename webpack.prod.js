@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const { merge } = require('webpack-merge')
 const Base = require('./webpack.config.js')
+const { unshiftModuleRuleStyleLoader } = require('./webpack.utils')
 const Mode = 'production'
 const { StaticPath, BuildPath, DllPath } = require('./config')
 const PublicPath = './'
@@ -41,27 +42,18 @@ module.exports = merge(Base, {
         exclude: path.resolve('node_modules'),
         include: path.resolve('src'),
       },
-      {
+      // 处理样式 将样式写入 css 文件
+      unshiftModuleRuleStyleLoader({
+        config: Base,
         test: /\.(css|sass|scss)$/,
-        // 注意 loader 加载顺序和书写顺序是相反的
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              // 根据抽离出来的css文件路径来设置
-              publicPath: '../../',
-            },
+        loader: {
+          loader: MiniCssExtractPlugin.loader,
+          options: {
+            // 根据抽离出来的css文件路径来设置
+            publicPath: '../../',
           },
-          'css-loader',
-          'postcss-loader',
-          {
-            loader: 'sass-loader',
-            options: {
-              additionalData: '@import "@/styles/index.scss";',
-            },
-          },
-        ],
-      },
+        },
+      }),
     ],
   },
   optimization: {
@@ -120,7 +112,7 @@ module.exports = merge(Base, {
     }),
     // 抽离css
     new MiniCssExtractPlugin({
-      filename: 'static/css/main.[hash].css',
+      filename: 'static/css/[name].[hash].css',
     }),
     // 开启多进程打包
     new Happypack({
