@@ -4,9 +4,12 @@ $max-width: 1000px;
 $primary-color: #10aa88;
 // 背景颜色
 $bg-color: #efedee;
+// 字体颜色
+$text-color: #6f6d6e;
 
 :export {
   maxWidth: $max-width;
   primaryColor: $primary-color;
   bgColor: $bg-color;
+  textColor: $text-color;
 }

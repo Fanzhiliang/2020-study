@@ -14,6 +14,7 @@ export function init(maxWidth = 0) {
     window.addEventListener(resizeEvt, recalc, false)
     document.addEventListener('DOMContentLoaded', recalc, false)
   }
+  recalc()
 }
 
 // 取消 rem

@@ -14,8 +14,8 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import { Row, Col } from '@/components/Grid'
-import My from './components/My/index.vue'
-import Info from './components/Info/index.vue'
+import My from './components/My.vue'
+import Info from './components/Info.vue'
 import Variable from './styles/variable.module.scss'
 import Rem from '@/utils/rem'
 
@@ -29,7 +29,7 @@ import Rem from '@/utils/rem'
   },
 })
 export default class extends Vue {
-  created() {
+  beforeCreate() {
     Rem.init(parseInt(Variable.maxWidth))
   }
 
@@ -44,10 +44,11 @@ export default class extends Vue {
 </style>
 
 <style lang="scss">
-html, body, #app {
+html, body {
   height: 100%;
   min-height: 100%;
   background-color: $bg-color;
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
 }
 
 #app {
@@ -58,7 +59,7 @@ html, body, #app {
 }
 
 .resume-wrap {
-  min-height: 100%;
+  min-height: 100vh;
 }
 
 @media (max-width: $screen-xs-max) {

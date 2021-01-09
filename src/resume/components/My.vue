@@ -52,7 +52,7 @@ export default class extends Vue {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .my {
   min-height: 100%;
   background-color: $bg-color;
@@ -94,7 +94,7 @@ export default class extends Vue {
     }
 
     .info {
-      color: #6f6d6e;
+      color: $text-color;
       font-size: 10rem;
       text-align: center;
       margin: 5rem 0;
@@ -152,7 +152,7 @@ export default class extends Vue {
       .value {
         padding-left: 5rem;
         font-size: 11rem;
-        color: #6f6d6e;
+        color: $text-color;
         transition: color 200ms;
       }
 

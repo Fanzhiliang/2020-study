@@ -70,20 +70,27 @@ const Base = {
       // 处理 .vue 文件
       {
         test: /\.vue$/,
-        use: 'vue-loader',
+        use: {
+          loader: 'vue-loader',
+          options: {
+            loaders: {
+              ts: 'ts-loader',
+              tsx: 'babel-loader!ts-loader',
+            },
+          },
+        },
         include: path.resolve('src'),
       },
       // 处理 ts 语法
       {
         test: /\.(ts|tsx)$/,
-        use: {
-          loader: 'ts-loader',
-          options: {
-            appendTsSuffixTo: [/\.vue$/],
-            transpileOnly: true,
-            happyPackMode: false,
+        use: [
+          'babel-loader',
+          {
+            loader: 'ts-loader',
+            options: { appendTsxSuffixTo: [/\.vue$/] },
           },
-        },
+        ],
         // 明确范围
         exclude: path.resolve('node_modules'),
         include: path.resolve('src'),
