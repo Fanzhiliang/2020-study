@@ -1,0 +1,12 @@
+// 最大宽度
+$max-width: 1000px;
+// 主要颜色
+$primary-color: #188BEF;
+// 背景颜色
+$bg-color: #efedee;
+
+:export {
+  maxWidth: $max-width;
+  primaryColor: $primary-color;
+  bgColor: $bg-color;
+}
