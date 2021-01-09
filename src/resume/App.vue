@@ -39,6 +39,10 @@ export default class extends Vue {
 }
 </script>
 
+<style>
+@import url('./styles/icons/iconfont.css');
+</style>
+
 <style lang="scss">
 html, body, #app {
   height: 100%;

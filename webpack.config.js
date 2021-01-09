@@ -37,7 +37,7 @@ const Base = {
     rules: [
       // 处理文件
       {
-        test: /\.(png|jpg|gif)$/i,
+        test: /\.(svg|png|jpg|gif|jpeg|bmp|tiff|eot|woff|woff2|ttf)$/i,
         use: [
           {
             loader: 'url-loader',
