@@ -18,12 +18,12 @@
     </div>
 
     <div class="links">
-      <p>
+      <!-- <p>
         <span class="icon">
           <i class="iconfont icongithub"></i>
         </span>
         <span class="value">https://github.com/Fanzhiliang</span>
-      </p>
+      </p> -->
       <p>
         <span class="icon">
           <i class="iconfont iconmail"></i>

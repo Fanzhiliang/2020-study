@@ -1,5 +1,7 @@
 <template>
-  <ul class="color-list">
+  <ul class="color-list" :class="{
+    'disc': isDisc
+  }">
     <li class="item" v-for="(item, index) in list" :key="index">{{ item }}</li>
   </ul>
 </template>
@@ -16,6 +18,13 @@ export default class extends Vue {
     default: () => ([]),
   })
   list!: string[]
+
+  // 是否显示实心圆
+  @Prop({
+    type: Boolean,
+    default: true,
+  })
+  isDisc!: boolean
 }
 </script>
 
@@ -28,11 +37,23 @@ export default class extends Vue {
     margin: 5rem 0;
     font-size: 10rem;
     color: $text-color;
-    &::before {
-      content: '●';
-      color: $primary-color;
-      margin-right: 5rem;
+  }
+
+  &.disc {
+    .item {
+      &::before {
+        content: '●';
+        color: $primary-color;
+        margin-right: 5rem;
+      }
+    }
+  }
+
+  @media (max-width: $screen-xs-max) {
+    .item {
+      font-size: 20rem;
     }
   }
 }
+
 </style>

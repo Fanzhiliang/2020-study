@@ -62,30 +62,21 @@ html, body {
   min-height: 100vh;
 }
 
-@media (max-width: $screen-xs-max) {
+@media (max-width: $max-width + 20px) {
   #app {
     margin-top: 0;
     margin-bottom: 0;
+    box-shadow: none;
+  }
+}
+
+@media (max-width: $screen-xs-max) {
+  html, body {
+    background-color: #FFFFFF;
   }
 
   .resume-wrap {
     min-height: auto;
-  }
-}
-
-.block {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #FFFFFF;
-  font-size: 16px;
-
-  &-head {
-    background-color: red;
-  }
-
-  &-main {
-    background-color: blue;
   }
 }
 </style>

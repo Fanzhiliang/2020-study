@@ -25,6 +25,7 @@ export default class extends Vue {
   .line-title {
     height: $height;
     position: relative;
+    margin-bottom: 10rem;
 
     &::before {
       content: '';
@@ -47,6 +48,12 @@ export default class extends Vue {
       padding: 0 20rem;
       z-index: 2;
       background-color: #FFFFFF;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      .value {
+        font-size: 24rem;
+      }
     }
   }
 </style>
