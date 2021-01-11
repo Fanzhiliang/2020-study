@@ -1,11 +1,11 @@
 <template>
-  <div id="app">
+  <div id="app" v-if="isFinal">
     <my-row class="resume-wrap" type="flex" align="stretch">
       <my-col :span="7" :xs="24">
-        <My />
+        <My :data="info" />
       </my-col>
       <my-col :span="17" :xs="24">
-        <Info />
+        <Info :skillList="skillList" :projectList="projectList" :summaryList="summaryList" />
       </my-col>
     </my-row>
   </div>
@@ -15,9 +15,10 @@
 import { Component, Vue } from 'vue-property-decorator'
 import { Row, Col } from '@/components/Grid'
 import My from './components/My.vue'
-import Info from './components/Info.vue'
+import InfoComponent from './components/Info.vue'
 import Variable from './styles/variable.module.scss'
 import Rem from '@/utils/rem'
+import { getInfo, Info, getSkillList, getProjectList, Project, getSummaryList } from './api/resume'
 
 @Component({
   name: 'App',
@@ -25,12 +26,66 @@ import Rem from '@/utils/rem'
     MyRow: Row,
     MyCol: Col,
     My,
-    Info,
+    Info: InfoComponent,
   },
 })
 export default class extends Vue {
   beforeCreate() {
     Rem.init(parseInt(Variable.maxWidth))
+  }
+
+  // 是否完成可以渲染试图
+  isFinal = false
+
+  // 个人信息
+  info: Info = null
+
+  // 获取个人信息
+  getInfo() {
+    return getInfo({}).then(res => {
+      this.info = res.data
+    })
+  }
+
+  // 技能列表
+  skillList: string[] = []
+
+  // 获取技能列表
+  getSkillList() {
+    return getSkillList({}).then(res => {
+      this.skillList = res.data
+    })
+  }
+
+  // 项目列表
+  projectList: Project[] = []
+
+  // 获取项目列表
+  getProjectList() {
+    return getProjectList({}).then(res => {
+      this.projectList = res.data
+    })
+  }
+
+  // 个人总结列表
+  summaryList: string[] = []
+
+  // 获取个人总结列表
+  getSummaryList() {
+    return getSummaryList({}).then(res => {
+      this.summaryList = res.data
+    })
+  }
+
+  created() {
+    Promise.all([
+      this.getInfo(),
+      this.getSkillList(),
+      this.getProjectList(),
+      this.getSummaryList(),
+    ]).then(() => {
+      this.isFinal = true
+    })
   }
 
   beforeDestroy() {

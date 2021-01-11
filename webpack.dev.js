@@ -92,6 +92,7 @@ module.exports = merge(Base, {
           NODE_ENV: '\'' + Mode + '\'',
           BASE_URL: '\'' + PublicPath + '\'',
           BASE_API: '\'/dev\'',
+          RESUME_BASE_API: '\'http://mock.alcyh.com/mock/5ffc04cfab3f3634c357d8e7/resume\'',
         },
       },
     }),

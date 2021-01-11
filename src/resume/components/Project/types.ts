@@ -1,7 +1,5 @@
-export interface ProjectData {
-  info?: string
-  name?: string
-  link?: string
-  tags?: string[]
-  detail?: string
+import { Project } from '../../api/resume'
+
+export {
+  Project as ProjectData,
 }

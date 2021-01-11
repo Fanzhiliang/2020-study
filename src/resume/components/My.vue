@@ -1,54 +1,61 @@
-<template>
-  <div class="my">
-
-    <div class="main-info">
-      <div class="avatar">
-        <img src="http://xinpuduoautoparts.cdn.test.douyait.cn/1610173160709_avatar.jpg" alt="">
-      </div>
-
-      <h2 class="name">樊致良</h2>
-
-      <h3 class="job">Web前端</h3>
-
-      <p class="info">男 / 24岁</p>
-
-      <p class="info">广东技术师范学院天河学院 - 计算机科学与技术</p>
-
-      <p class="info">本科 / 2019年毕业</p>
-    </div>
-
-    <div class="links">
-      <!-- <p>
-        <span class="icon">
-          <i class="iconfont icongithub"></i>
-        </span>
-        <span class="value">https://github.com/Fanzhiliang</span>
-      </p> -->
-      <p>
-        <span class="icon">
-          <i class="iconfont iconmail"></i>
-        </span>
-        <span class="value">505911050@qq.com</span>
-      </p>
-      <p>
-        <span class="icon">
-          <i class="iconfont iconphone"></i>
-        </span>
-        <span class="value">13128269543</span>
-      </p>
-    </div>
-
-  </div>
-</template>
-
-<script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+<script lang="tsx">
+import { Component, Vue, Prop } from 'vue-property-decorator'
+import { Info } from '../api/resume'
 
 @Component({
   name: 'My',
 })
 export default class extends Vue {
+  render() {
+    return (
+      <div class='my'>
+        <div class='main-info'>
+          <div class='avatar'>
+            <img src='http://xinpuduoautoparts.cdn.test.douyait.cn/1610173160709_avatar.jpg' alt='' />
+          </div>
 
+          <h2 class='name'>{ this.data.name }</h2>
+
+          <h3 class='job'>{ this.data.job }</h3>
+
+          <p class='info'>{ this.data.gender } / { this.data.age }岁</p>
+
+          <p class='info'>{ this.data.school } - { this.data.major }</p>
+
+          <p class='info'>{ this.data.education } / { this.data.graduationYear }年毕业</p>
+        </div>
+
+        <div class='links'>
+          {
+          // <p>
+          //   <span class="icon">
+          //     <i class="iconfont icongithub"></i>
+          //   </span>
+          //   <span class="value">{ this.data.github }</span>
+          // </p>
+          }
+          <p>
+            <span class='icon'>
+              <i class='iconfont iconmail'></i>
+            </span>
+            <span class='value'>{ this.data.email }</span>
+          </p>
+          <p>
+            <span class='icon'>
+              <i class='iconfont iconphone'></i>
+            </span>
+            <span class='value'>{ this.data.phone }</span>
+          </p>
+        </div>
+      </div>
+    )
+  }
+
+  @Prop({
+    type: Object,
+    default: () => ({}),
+  })
+  data!: Info
 }
 </script>
 

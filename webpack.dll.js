@@ -9,7 +9,7 @@ module.exports = {
   // 入口文件
   entry: {
     // 把相关模块放进一个单独的动态链接库
-    WebpackDll: ['vue', 'vue-router', 'vuex'],
+    WebpackDll: ['vue', 'vue-router', 'vuex', 'axios'],
   },
   output: {
     // 输出的动态链接库文件名称，也就是 entry 中设置的属性名
