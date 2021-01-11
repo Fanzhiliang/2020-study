@@ -15,9 +15,11 @@ export default class extends Vue {
           { this.data.link && (
             <a class='link' href={ this.data.link } target='_blank'>{ this.data.link }</a>
           )}
+          <a v-show={ false } class='link' href={ this.data.link } target='_blank'>{ this.data.link }</a>
           { this.data.info && (
             <div class='info'>{ this.data.info }</div>
           )}
+
         </div>
         <p class='detail'>
           { this.data.tags.map(tag => (

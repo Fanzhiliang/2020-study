@@ -9,7 +9,9 @@
     ]
   ],
   "plugins": [
+    "jsx-v-model",
     "transform-vue-jsx",
+    "@vue/babel-plugin-jsx",
     [
       "@babel/plugin-transform-runtime",
       {
