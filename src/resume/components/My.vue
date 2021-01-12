@@ -1,6 +1,7 @@
 <script lang="tsx">
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import { Info } from '../api/resume'
+import { handleClipboard } from '@/utils/clipboard'
 
 @Component({
   name: 'My',
@@ -34,13 +35,13 @@ export default class extends Vue {
           //   <span class="value">{ this.data.github }</span>
           // </p>
           }
-          <p>
+          <p onClick={ (e) => this.handleCopy(e, this.data.email) }>
             <span class='icon'>
               <i class='iconfont iconmail'></i>
             </span>
             <span class='value'>{ this.data.email }</span>
           </p>
-          <p>
+          <p onClick={ (e) => this.handleCopy(e, this.data.phone) }>
             <span class='icon'>
               <i class='iconfont iconphone'></i>
             </span>
@@ -56,6 +57,11 @@ export default class extends Vue {
     default: () => ({}),
   })
   data!: Info
+
+  // 复制邮箱
+  handleCopy(e, text = '') {
+    handleClipboard(text, e)
+  }
 }
 </script>
 

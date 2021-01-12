@@ -1,0 +1,24 @@
+$height: 40px;
+
+._message-container {
+  position: fixed;
+  top: -40px;
+  left: 50%;
+  opacity: 0;
+  transform: translate(-50%, 0);
+  background-color: #ffffff;
+  color: #666666;
+  border-radius: 10px;
+  height: $height;
+  line-height: $height;
+  font-size: 14px;
+  padding: 0 20px;
+  box-shadow: 0 3px 20px rgba(136, 136, 136, 0.3);
+  z-index: 50;
+
+  &.show {
+    transition: all 200ms;
+    top: 40px;
+    opacity: 1;
+  }
+}
