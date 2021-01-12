@@ -12,7 +12,7 @@ export default class Message extends Vue implements MessageInstance {
   render(h: CreateElement) {
     return h('div', {
       class: {
-        '_message-container': true,
+        _message_container_: true,
         show: this.isShow,
       },
     }, [
@@ -20,7 +20,7 @@ export default class Message extends Vue implements MessageInstance {
     ])
   }
 
-  message = '&nbsp;'
+  message = ' '
 
   isShow = false
 

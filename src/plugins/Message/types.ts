@@ -1,10 +1,8 @@
-import Vue from 'vue'
-
-export interface MessageInterface {
+export interface HandleMessage {
   (message: string): void
 }
 
-export interface MessageInstance extends Vue {
+export interface MessageInstance {
   message?: string
   isShow?: boolean
   duration?: number

@@ -1,9 +1,9 @@
 import Vue from 'vue'
-import { MessageInterface, MessageInstance } from './types'
+import { HandleMessage } from './types'
 import { id } from './config'
 import Message from './Message'
 
-let $message: MessageInstance = null
+let $message = null
 
 // 初始化
 const init = function() {
@@ -18,7 +18,8 @@ const init = function() {
   }, 0)
 }
 
-const message: MessageInterface = function(message = '') {
+// 弹出消息
+const message: HandleMessage = function(message = '') {
   if ($message) {
     $message.message = message
 
@@ -30,14 +31,14 @@ const message: MessageInterface = function(message = '') {
 
 export default {
   install: function(vue: typeof Vue) {
+    init()
     vue.prototype.$message = message
   },
 }
 
 declare module 'vue/types/vue' {
   interface Vue {
-    $message: MessageInterface
+    $message: HandleMessage
   }
 }
 
-init()

@@ -1,1 +1,1 @@
-export const id = 'message-container'
+export const id = '_message_container_'
