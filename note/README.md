@@ -1225,7 +1225,7 @@ declare global {
 }
 ```
 
-4. jsx 使用 v-show v-model 指令 [参考](https://github.com/vuejs/babel-plugin-transform-vue-jsx)
+5. jsx 使用 v-show v-model 指令 [参考](https://github.com/vuejs/babel-plugin-transform-vue-jsx)
 
 ```
 npm run --save-dev @vue/babel-plugin-jsx babel-helper-vue-jsx-merge-props babel-plugin-transform-vue-jsx babel-preset-env babel-plugin-jsx-v-model
@@ -1258,7 +1258,29 @@ npm run --save-dev babel-plugin-transform-vue-jsx@4
 }
 ```
 
+#### 5.8 定义全局变量
 
+突然发现不能像 vue-cli 一样定义全局变量，不报已经定义过的错误，需要添加 tsconfig.json 的设置
+
+1. tsconfig.json
+
+```
+{
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "noImplicitThis": true,
+  }
+}
+```
+
+2. 使用
+
+```
+// 定义全局变量 window
+declare const global: {
+  something(): any
+}
+```
 
 
 
