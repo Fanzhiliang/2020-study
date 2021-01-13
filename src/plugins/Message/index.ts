@@ -36,9 +36,6 @@ export default {
   },
 }
 
-declare module 'vue/types/vue' {
-  interface Vue {
-    $message: HandleMessage
-  }
+export {
+  message,
 }
-

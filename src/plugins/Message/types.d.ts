@@ -8,3 +8,12 @@ export interface MessageInstance {
   duration?: number
   show?(): void
 }
+
+declare module 'vue/types/vue' {
+  interface Vue {
+    $message: HandleMessage
+    prototype: {
+      $message: HandleMessage
+    }
+  }
+}

@@ -67,6 +67,3 @@ new Vue({
 }).$mount('#app')
 
 console.log(sum(1, 2))
-
-console.log('关于 .d.ts')
-console.log(global)

@@ -28,7 +28,7 @@ const Base = {
     filename: 'static/js/[name].[hash].js',
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.vue', '.ts', '.tsx', '.json'],
+    extensions: ['.js', '.jsx', '.vue', '.ts', '.d.ts', '.tsx', '.json'],
     alias: {
       '@': path.resolve(SrcPath),
     },

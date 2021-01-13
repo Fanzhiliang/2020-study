@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
-import Message from '@/plugins/Message/index'
+import Message from '@/plugins/Message/index.ts'
 
 Vue.use(Message)
 

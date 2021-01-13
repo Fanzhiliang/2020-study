@@ -5,5 +5,5 @@ declare module '*.vue' {
 
 // 定义全局变量 window
 declare const global: {
-  something(): any
+  something(): void
 }
