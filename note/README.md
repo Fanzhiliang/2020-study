@@ -209,7 +209,7 @@ optimization: {
 plugins: [
   // 抽离css
   new MiniCssExtractPlugin({
-    filename: 'static/css/main.[hash].css'
+    filename: 'static/css/main.[contenthash].css'
   })
 ]
 
@@ -368,8 +368,8 @@ entry: {
 // 打包路径
 output: {
   // [name]：多入口文件名
-  // [hash]：hash值
-  filename: 'static/js/[name].[hash].js'
+  // [contenthash]：hash值
+  filename: 'static/js/[name].[contenthash].js'
 },
 
 plugins: [
@@ -979,7 +979,7 @@ module: {
 plugins: [
   // 抽离css
   new MiniCssExtractPlugin({
-    filename: 'static/css/[name].[hash].css',
+    filename: 'static/css/[name].[contenthash].css',
   }),
 ]
 ```

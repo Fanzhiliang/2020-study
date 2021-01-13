@@ -24,8 +24,8 @@ const Base = {
     // 必须是绝对路径
     path: path.join(__dirname, BuildPath),
     // [name]：多入口文件名
-    // [hash]：hash值
-    filename: 'static/js/[name].[hash].js',
+    // [contenthash]：hash值
+    filename: 'static/js/[name].[contenthash].js',
   },
   resolve: {
     extensions: ['.js', '.jsx', '.vue', '.ts', '.d.ts', '.tsx', '.json'],

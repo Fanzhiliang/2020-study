@@ -113,7 +113,7 @@ module.exports = merge(Base, {
     }),
     // 抽离css
     new MiniCssExtractPlugin({
-      filename: 'static/css/[name].[hash].css',
+      filename: 'static/css/[name].[contenthash].css',
     }),
     // 开启多进程打包
     new Happypack({

@@ -60,7 +60,6 @@ export default class extends Vue {
 
   // 复制邮箱
   handleCopy(e, text = '') {
-    this.$message('')
     handleClipboard(text, e)
   }
 }

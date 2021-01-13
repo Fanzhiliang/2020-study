@@ -66,13 +66,13 @@ export default class extends Vue {
       @include ellipsis;
       display: inline-block;
       font-size: 12rem;
-      padding-left: 20rem;
+      margin-left: 20rem;
     }
 
     .link {
       @include ellipsis;
       display: inline-block;
-      padding-left: 20rem;
+      margin-left: 20rem;
       &:hover {
         color: $primary-color;
       }
@@ -98,11 +98,14 @@ export default class extends Vue {
     font-size: 20rem;
 
     .title {
-      .info {
-        font-size: 22rem;
-      }
       .name {
         font-size: 20rem;
+      }
+      .info {
+        font-size: 19rem;
+      }
+      .link {
+        font-size: 18rem;
       }
     }
 
