@@ -1,4 +1,4 @@
-import request from '../utils/request'
+import fetch from './fetch'
 
 export interface Info {
   name?: string
@@ -14,20 +14,6 @@ export interface Info {
   phone?: string
 }
 
-// 获取个人信息
-export const getInfo = (params: any) => request({
-  url: '/getInfo',
-  method: 'get',
-  params,
-})
-
-// 获取技能列表
-export const getSkillList = (params: any) => request({
-  url: '/getSkillList',
-  method: 'get',
-  params,
-})
-
 export interface Project {
   info?: string
   name?: string
@@ -36,15 +22,36 @@ export interface Project {
   detail?: string
 }
 
+// export interface API {
+//   '/getInfo': Info
+//   '/getSkillList': string[]
+//   '/getProjectList': Project[]
+//   '/getSummaryList': string[]
+// }
+
+// 获取个人信息
+export const getInfo = (params: any) => fetch<Info>({
+  url: '/getInfo',
+  method: 'get',
+  params,
+})
+
+// 获取技能列表
+export const getSkillList = (params: any) => fetch<string[]>({
+  url: '/getSkillList',
+  method: 'get',
+  params,
+})
+
 // 获取项目列表
-export const getProjectList = (params: any) => request({
+export const getProjectList = (params: any) => fetch<Project[]>({
   url: '/getProjectList',
   method: 'get',
   params,
 })
 
 // 获取个人总结列表
-export const getSummaryList = (params: any) => request({
+export const getSummaryList = (params: any) => fetch<string[]>({
   url: '/getSummaryList',
   method: 'get',
   params,
