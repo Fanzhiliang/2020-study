@@ -1,6 +1,4 @@
-export interface HandleMessage {
-  (message: string): void
-}
+export type HandleMessage = (message: string) => void
 
 export interface MessageInstance {
   message?: string
@@ -11,7 +9,6 @@ export interface MessageInstance {
 
 declare module 'vue/types/vue' {
   interface Vue {
-    $message: HandleMessage
     prototype: {
       $message: HandleMessage
     }

@@ -88,9 +88,9 @@ export default class extends Vue {
     })
   }
 
-  beforeDestroy() {
-    Rem.destroy()
-  }
+  // beforeDestroy() {
+  //   Rem.destroy()
+  // }
 }
 </script>
 

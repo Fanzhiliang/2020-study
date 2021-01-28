@@ -1,4 +1,4 @@
-import { message } from '@/plugins/Message/index.ts'
+import { message } from '@/plugins/Message'
 import Clipboard from 'clipboard'
 
 export const clipboardSuccess = () => {
