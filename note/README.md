@@ -1137,7 +1137,7 @@ module: {
 
 #### 5.7 render 内使用 jsx
 
-上面一顿操作后发现在 render 里面不能使用 jsx，需要再修改设置 [参考](https://www.baidu.com/index.php?tn=monline_3_dg)
+上面一顿操作后发现在 render 里面不能使用 jsx，需要再修改设置
 
 1. webpack.config.js
 
@@ -1228,10 +1228,10 @@ declare global {
 5. jsx 使用 v-show v-model 指令 [参考](https://github.com/vuejs/babel-plugin-transform-vue-jsx)
 
 ```
-npm run --save-dev @vue/babel-plugin-jsx babel-helper-vue-jsx-merge-props babel-plugin-transform-vue-jsx babel-preset-env babel-plugin-jsx-v-model
+npm install --save-dev @vue/babel-plugin-jsx babel-helper-vue-jsx-merge-props babel-plugin-transform-vue-jsx babel-preset-env babel-plugin-jsx-v-model
 
 // 如果是 babel 7 的话 babel-plugin-transform-vue-jsx 要安装 4.X 的版本
-npm run --save-dev babel-plugin-transform-vue-jsx@4
+npm install --save-dev babel-plugin-transform-vue-jsx@4
 
 // .babelrc
 {
@@ -1260,7 +1260,7 @@ npm run --save-dev babel-plugin-transform-vue-jsx@4
 
 #### 5.8 定义全局变量
 
-突然发现不能像 vue-cli 一样定义全局变量，不报已经定义过的错误，需要添加 tsconfig.json 的设置
+突然发现不能像 vue-cli 一样定义全局变量，报已经定义过的错误，需要添加 tsconfig.json 的设置
 
 1. tsconfig.json
 
